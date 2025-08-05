@@ -4,19 +4,3 @@ files:
   - source: /
     destination: /var/www/html
     file_exists_behavior: OVERWRITE
-hooks:
-  BeforeInstall:
-    - location: /bin/bash
-      timeout: 300
-      runas: root
-      args: ["-c", "rm -rf /var/www/html/* /var/www/html/.*[!.] 2>/dev/null || true"]
-  ApplicationStart:
-    - location: /bin/bash
-      timeout: 300
-      runas: root
-      args: ["-c", "systemctl start httpd && systemctl enable httpd"]
-  ApplicationStop:
-    - location: /bin/bash
-      timeout: 300
-      runas: root
-      args: ["-c", "systemctl stop httpd || true"]
